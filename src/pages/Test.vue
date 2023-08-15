@@ -1,6 +1,7 @@
-<template>
+<!-- <template>
     <div>
         <Toast />
+
         <div class="card">
             <Steps :model="items" aria-label="Form Steps" />
         </div>
@@ -62,5 +63,5 @@ const complete = () => {
 
 ::v-deep(.p-card-body) {
     padding: 2rem;
-}
+} -->
 </style>

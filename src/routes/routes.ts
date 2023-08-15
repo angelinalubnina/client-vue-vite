@@ -13,13 +13,14 @@ import Basket from '../pages/Basket.vue';
 import Auth from '../pages/Auth.vue';
 import DevicePage from '../pages/DevicePage.vue';
 import Shop from '../pages/Shop.vue';
-import Test from '../pages/Test.vue';
+// import Test from '../pages/Test.vue';
 import Test2 from '../pages/Test2.vue';
 import Ordering from '../pages/Ordering.vue';
-import PersonalDemo from '../components/PersonalDemo.vue';
-import SeatDemo from '../components/SeatDemo.vue';
-import PaymentDemo from '../components/PaymentDemo.vue';
-import Confirmation from '../components/Confirmation.vue';
+
+import PersonalDemo from "../components/PersonalDemo.vue";
+import SeatDemo from "../components/SeatDemo.vue";
+import PaymentDemo from "../components/PaymentDemo.vue";
+import ConfirmationDemo from "../components/ConfirmationDemo.vue";
 
 const routes = [
     {
@@ -68,16 +69,17 @@ const routes = [
     },
     {
         path: '/confirmation',
-        component: Confirmation,
+        component: ConfirmationDemo,
     },
-    {
-        path: '/test',
-        component: Test,
-    },
+    // {
+    //     path: '/personal',
+    //     component: Test,
+    // },
     {
         path: '/test2',
         component: Test2,
     },
+
 ];
 
 // const router = createRouter({

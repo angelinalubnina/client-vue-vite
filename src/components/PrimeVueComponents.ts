@@ -24,6 +24,8 @@ import DataTable from 'primevue/datatable';
 import Column from 'primevue/column';
 import ColumnGroup from 'primevue/columngroup';   // optional
 import Row from 'primevue/row';                   // optional
+import InputMask from 'primevue/inputmask';
+import Checkbox from 'primevue/checkbox';
 
 
 export default [
@@ -52,5 +54,7 @@ export default [
     DataTable,
     Column,
     ColumnGroup,
-    Row
+    Row,
+    InputMask,
+    Checkbox,
 ]

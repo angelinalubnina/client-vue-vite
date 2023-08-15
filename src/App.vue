@@ -11,7 +11,7 @@ import jwt_decode from 'jwt-decode';
 import { $authHost, $host } from './http/index';
 import { useUserStore } from './stores/userStore';
 import { useDeviceStore } from './stores/deviceStore';
-import { onBeforeMount, onMounted } from 'vue';
+import { onBeforeMount, onMounted, ref } from 'vue';
 import { mapWritableState } from 'pinia';
 
 const deviceStore = useDeviceStore();
@@ -22,9 +22,9 @@ const fetchData = async () => {
 
     const typeRes = await $host.get('api/type');
     deviceStore.types = typeRes.data;
-    
+
     const deviseRes = await $host.get('api/device');
-    let devices = []
+    let devices = [];
     for (const device of deviseRes.data) {
         device.typeName = deviceStore.types.find(
             (type) => type._id === device.type,
@@ -34,13 +34,12 @@ const fetchData = async () => {
         )?.name;
         devices.push(device);
     }
-    deviceStore.devices = devices
-
+    deviceStore.devices = devices;
 };
-// fetchData();
+const formObject = ref({});
 
-onBeforeMount(fetchData)
-
+onBeforeMount(fetchData);
 </script>
 
-<style scoped></style>
+<style scoped>
+</style>

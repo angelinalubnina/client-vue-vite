@@ -57,7 +57,7 @@
 </template>
 
 <script setup>
-import { ref, computed, defineComponent } from 'vue';
+import { ref, computed, defineComponent, nextTick } from 'vue';
 import { RouterLink, useRoute, useRouter } from 'vue-router';
 import { REGISTRATION_ROUTE, LOGIN_ROUTE, SHOP_ROUTE } from '../utils/consts';
 // import jwt_decode from 'jwt-decode';
@@ -83,9 +83,7 @@ const click = async () => {
         } else {
             userData = await registration(email.value, password.value);
         }
-        // user.setUser(userData);
-        // user.setIsAuth(true);
-        router.push(SHOP_ROUTE);
+        refreshAndNavigate();
     } catch (e) {
         if (e.response && e.response.data) {
             let data = e.response.data;
@@ -97,6 +95,12 @@ const click = async () => {
         }
     }
 };
+// переписать refreshAndNavigate
+const refreshAndNavigate = async () => {
+    router.push(SHOP_ROUTE);
+    await new Promise(resolve => setTimeout(resolve, 100));
+    window.location.reload();
+}
 
 const registration = async (email, password) => {
     const { data } = await $host.post('api/user/registration', {
@@ -111,7 +115,7 @@ const registration = async (email, password) => {
 const login = async (email, password) => {
     const { data } = await $host.post('api/user/login', { email, password });
     localStorage.setItem('accessToken', data.accessToken);
-    userStore.login(data)
+    userStore.login(data);
     // return jwt_decode(data.accessToken);
 };
 </script>

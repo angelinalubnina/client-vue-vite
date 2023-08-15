@@ -16,12 +16,15 @@ import {
 import { useUserStore } from '../stores/userStore';
 import { $authHost } from '../http/index';
 import jwt_decode from 'jwt-decode';
+// import router from '../routes/routes';
+import { useRouter } from 'vue-router';
 
 const isAuth = ref(false);
 const isAdmin = ref(false);
 const items = ref([]);
 const email = ref('');
 const userStore = useUserStore();
+const router = useRouter()
 
 onBeforeMount(async () => {
     const userStore = useUserStore();
@@ -92,9 +95,11 @@ onBeforeMount(async () => {
     ];
 });
 
+
 const logout = () => {
     userStore.logout();
     localStorage.removeItem('accessToken');
+    router.go(0)
 };
 </script>
 
