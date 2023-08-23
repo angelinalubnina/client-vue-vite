@@ -5,7 +5,7 @@ import {
     LOGIN_ROUTE,
     REGISTRATION_ROUTE,
     SHOP_ROUTE,
-    ORDERING_ROUTE,
+
 } from '../utils/consts';
 import { createRouter, createWebHashHistory } from 'vue-router';
 import Admin from '../pages/Admin.vue';
@@ -15,12 +15,11 @@ import DevicePage from '../pages/DevicePage.vue';
 import Shop from '../pages/Shop.vue';
 // import Test from '../pages/Test.vue';
 import Test2 from '../pages/Test2.vue';
-import Ordering from '../pages/Ordering.vue';
 
-import PersonalDemo from "../components/PersonalDemo.vue";
-import SeatDemo from "../components/SeatDemo.vue";
-import PaymentDemo from "../components/PaymentDemo.vue";
-import ConfirmationDemo from "../components/ConfirmationDemo.vue";
+import Personal from "../pages/ordering/Personal.vue";
+import Address from "../pages/ordering/Address.vue";
+import Payment from "../pages/ordering/Payment.vue";
+import Confirmation from "../pages/ordering/Confirmation.vue";
 
 const routes = [
     {
@@ -52,29 +51,21 @@ const routes = [
         component: DevicePage,
     },
     {
-        path: ORDERING_ROUTE,
-        component: Ordering,
-    },
-    {
         path: '/personal',
-        component: PersonalDemo,
+        component: Personal,
     },
     {
-        path: '/seat',
-        component: SeatDemo,
+        path: '/address',
+        component: Address,
     },
     {
         path: '/payment',
-        component: PaymentDemo,
+        component: Payment,
     },
     {
         path: '/confirmation',
-        component: ConfirmationDemo,
+        component: Confirmation,
     },
-    // {
-    //     path: '/personal',
-    //     component: Test,
-    // },
     {
         path: '/test2',
         component: Test2,

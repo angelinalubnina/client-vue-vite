@@ -78,7 +78,7 @@
 <script setup>
 import { ref, onBeforeMount } from 'vue';
 import { useRouter } from 'vue-router';
-import { useUserStore } from '../stores/userStore';
+import { useUserStore } from '../../stores/userStore';
 
 const items = ref([
     {
@@ -86,8 +86,8 @@ const items = ref([
         to: "/personal"
     },
     {
-        label: 'Seat',
-        to: "/seat",
+        label: 'Address',
+        to: '/address',
     },
     {
         label: 'Payment',
@@ -114,6 +114,6 @@ function complete() {
     console.log('Отправилось на сервак')
     // this.$emit('complete');
     // надо прописать логику с сохранением или не сохранением данных карты
-    router.push('/busket');
+    router.push('/');
 }
 </script>

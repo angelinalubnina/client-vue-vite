@@ -6,6 +6,5 @@ export const REGISTRATION_ROUTE = '/registration';
 export const SHOP_ROUTE = '/';
 export const BASKET_ROUTE = '/basket';
 export const DEVICE_ROUTE = '/device';
-export const ORDERING_ROUTE = '/ordering'
 // export const devicesImgDirName = 'device/'
 export const defaultDeviceImg = 'https://primevue.org/images/galleria/galleria15.jpg'

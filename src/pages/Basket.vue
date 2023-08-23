@@ -8,7 +8,7 @@
                         class="flex flex-column xl:flex-row xl:align-items-start p-4 gap-4"
                     >
                         <a
-                            :href="`http://localhost:8080/#/device/${slotProps.data.name}`"
+                            :href="`${BASE_URL}/device/${slotProps.data.name}`"
                         >
                             <img
                                 class="w-9 sm:w-16rem xl:w-10rem shadow-2 block xl:block mx-auto border-round"
@@ -92,9 +92,8 @@ import { useToast } from 'primevue/usetoast';
 import { $authHost } from '../http/index';
 import { ref, onBeforeMount, onMounted } from 'vue';
 import { useDeviceStore } from '../stores/deviceStore';
-import { SERVER_URL, defaultDeviceImg, BASKET_ROUTE } from '../utils/consts';
+import { SERVER_URL, BASE_URL, defaultDeviceImg } from '../utils/consts';
 import { computed } from 'vue';
-import { ORDERING_ROUTE } from '../utils/consts';
 import { useRouter } from 'vue-router';
 
 const deviceStore = useDeviceStore();

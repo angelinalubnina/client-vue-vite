@@ -3,7 +3,7 @@ import { ref, computed, onBeforeMount } from 'vue';
 import ListBox from '../components/UI/ListBox.vue';
 import { Estock } from '../service/ProductService';
 import { $host, $authHost } from '../http/index';
-import { SERVER_URL, defaultDeviceImg } from '../utils/consts';
+import { SERVER_URL, BASE_URL, defaultDeviceImg } from '../utils/consts';
 import { useUserStore } from '../stores/userStore';
 import { useDeviceStore } from '../stores/deviceStore';
 import jwt_decode from 'jwt-decode';
@@ -202,7 +202,7 @@ const visible = computed(() => {
                             class="flex flex-column xl:flex-row xl:align-items-start p-4 gap-4"
                         >
                             <a
-                                :href="`http://localhost:8080/#/device/${slotProps.data.name}`"
+                                :href="`${BASE_URL}/device/${slotProps.data.name}`"
                             >
                                 <img
                                     class="w-9 sm:w-16rem xl:w-10rem shadow-2 block xl:block mx-auto border-round"
@@ -302,7 +302,7 @@ const visible = computed(() => {
                                 class="flex flex-column align-items-center gap-3 py-5"
                             >
                                 <a
-                                    :href="`http://localhost:8080/#/device/${slotProps.data.name}`"
+                                    :href="`${BASE_URL}/device/${slotProps.data.name}`"
                                 >
                                     <img
                                         class="w-9 shadow-2 border-round"

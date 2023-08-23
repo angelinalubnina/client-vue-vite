@@ -62,7 +62,7 @@
 <script setup>
 import { ref } from 'vue';
 import { useRouter } from 'vue-router';
-import { useUserStore } from '../stores/userStore';
+import { useUserStore } from '../../stores/userStore';
 
 const userStore = useUserStore();
 const router = useRouter()
@@ -75,8 +75,8 @@ const items = ref([
         to: "/personal"
     },
     {
-        label: 'Seat',
-        to: "/seat",
+        label: 'Address',
+        to: '/address',
     },
     {
         label: 'Payment',
@@ -104,6 +104,6 @@ function nextPage() {
     router.push('/confirmation');
 }
 function prevPage() {
-    router.push('/seat');
+    router.push('/address');
 }
 </script>

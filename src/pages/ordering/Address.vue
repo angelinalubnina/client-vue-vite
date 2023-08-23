@@ -51,7 +51,7 @@
 <script setup>
 import { ref } from 'vue';
 import { useRouter } from 'vue-router';
-import { useUserStore } from '../stores/userStore';
+import { useUserStore } from '../../stores/userStore';
 
 const userStore = useUserStore();
 const items = ref([
@@ -60,8 +60,8 @@ const items = ref([
         to: '/personal',
     },
     {
-        label: 'Seat',
-        to: '/seat',
+        label: 'Address',
+        to: '/address',
     },
     {
         label: 'Payment',

@@ -179,11 +179,10 @@
 </template>
 
 <script setup>
-import { ref, computed } from 'vue';
+import { ref, computed, onBeforeMount } from 'vue';
 import { useDeviceStore } from '../../stores/deviceStore';
 import { $authHost, $host } from '../../http/index';
 import { useToast } from 'primevue/usetoast';
-import { onBeforeMount } from 'vue';
 
 const deviceStore = useDeviceStore();
 

@@ -2,7 +2,7 @@
     <div class="card">
         <Steps :model="items" :readonly="false" aria-label="Form Steps" />
     </div>
-    <div class="stepsdemo-content m-auto" style="max-width: 60rem;">
+    <div class="stepsdemo-content m-auto" style="max-width: 60rem">
         <Card>
             <template v-slot:title> Персональная инфармация </template>
             <template v-slot:subtitle>
@@ -48,21 +48,18 @@
 <script setup>
 import { ref, computed } from 'vue';
 import { useRouter } from 'vue-router';
-import { useUserStore } from '../stores/userStore';
+import { useUserStore } from '../../stores/userStore';
 
 const userStore = useUserStore();
 const router = useRouter();
-
 
 // const firstname = computed(() => {
 //   userStore.getFormData().firstname
 // //   set: (value) => userStore.commit('updateUserData', { firstname: value }),
 // });
 
-
 const firstname = ref('');
 const lastname = ref('');
-let submitted = ref(false);
 const validationErrors = ref({});
 
 const items = ref([
@@ -71,8 +68,8 @@ const items = ref([
         to: '/personal',
     },
     {
-        label: 'Seat',
-        to: '/seat',
+        label: 'Address',
+        to: '/address',
     },
     {
         label: 'Payment',
@@ -87,14 +84,11 @@ const items = ref([
 const formData = ref(null);
 
 function nextPage() {
-    submitted = true;
-    if (true) {
-        formData.value = userStore.getFormData();
-        formData.value.append('firstname', firstname.value);
-        formData.value.append('lastname', lastname.value);
-        console.log(Object.fromEntries(formData.value));
-        router.push('/seat');
-    }
+    formData.value = userStore.getFormData();
+    formData.value.append('firstname', firstname.value);
+    formData.value.append('lastname', lastname.value);
+    console.log(Object.fromEntries(formData.value));
+    router.push('/address');
 }
 // function validateForm() {
 //     if (!firstname.value.trim())
