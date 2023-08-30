@@ -90,7 +90,7 @@
 <script setup>
 import { useToast } from 'primevue/usetoast';
 import { $authHost } from '../http/index';
-import { ref, onBeforeMount, onMounted } from 'vue';
+import { ref, onBeforeMount } from 'vue';
 import { useDeviceStore } from '../stores/deviceStore';
 import { SERVER_URL, BASE_URL, defaultDeviceImg } from '../utils/consts';
 import { computed } from 'vue';

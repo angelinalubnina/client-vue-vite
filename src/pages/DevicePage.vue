@@ -27,10 +27,18 @@
             </Galleria>
         </div>
         <div class="col-12 lg:col-6 py-0 lg:pl-5 w-25rem">
-            <div class="flex justify-content-around flex-wrap">
-                <h2>
+            <div class="text-center">
+                <h1>
                     {{ nameDevice }}
-                </h2>
+                </h1>
+                <div class="flex justify-content-around flex-wrap">
+                    <h3>
+                        {{ typeDevice }}
+                    </h3>
+                    <h3>
+                        {{ brandDevice }}
+                    </h3>
+                </div>
             </div>
             <div class="flex justify-content-around flex-wrap">
                 <div style="margin-right: 20px">${{ getPrice() }}</div>
@@ -62,6 +70,12 @@
                     <p>Выбранный цвет: {{ selectedCode }}</p>
                 </div>
             </div>
+            <Button
+                icon="pi pi-shopping-cart"
+                rounded
+                :disabled="false"
+                @click="addOneDevice(slotProps.data.name)"
+            ></Button>
         </div>
     </div>
     <div v-else>Идет загрузка!</div>
@@ -119,6 +133,8 @@ const selectedColor = computed(() => {
 const route = useRoute();
 const name = route.params.name;
 const nameDevice = ref('');
+const typeDevice = ref('')
+const brandDevice = ref('')
 
 async function findPictures() {
     if (device.value.images.length > 0) {
@@ -130,7 +146,7 @@ async function findPictures() {
     } else {
         images.value.push({ name: defaultDeviceImg });
     }
-    nameDevice.value = device.value.name;
+    
 }
 
 const isDeviceLoaded = computed(() => {
@@ -145,6 +161,28 @@ const isDeviceLoaded = computed(() => {
     }
 });
 
+const addOneDevice = async (deviceName) => {
+    try {
+        const res = await $authHost.post('api/basketDevice/' + deviceName, {
+            name: deviceName,
+        });
+        // toast.add({
+        //     severity: 'success',
+        //     summary: 'Удачно 😊',
+        //     detail: 'Девайс добавлен в корзину',
+        //     life: 1500,
+        // });
+    } catch (e) {
+        console.log('Ошибка 😞')
+        // toast.add({
+        //     severity: 'error',
+        //     summary: 'Ошибка 😞',
+        //     detail: e.message,
+        //     life: 1500,
+        // });
+    }
+};
+
 onBeforeMount(async () => {
     const response = await $host.get('api/device/' + name)
     device.value = response.data;
@@ -152,6 +190,10 @@ onBeforeMount(async () => {
     colors.value = device.value.availableColors
     colorCodes.value = device.value.availableColors.map(color => color.code)
     
+    nameDevice.value = device.value.name;
+    typeDevice.value = device.value.typeName;
+    brandDevice.value = device.value.brandName;
+
     await findPictures();
 });
 </script>
