@@ -20,7 +20,7 @@
                     placeholder="Тип"
                     :maxSelectedLabels="1"
                     class="w-full md:w-20rem"
-                    selectionLimit="1"
+                    selectionLimit=1
                     selectedItemsLabel="больше 1"
                 />
             </div>
@@ -35,7 +35,7 @@
                     placeholder="Бренд"
                     :maxSelectedLabels="1"
                     class="w-full md:w-20rem"
-                    selectionLimit="1"
+                    selectionLimit=1
                 />
             </div>
             <div class="card flex justify-content-center">
@@ -62,21 +62,6 @@
                                 ></span>
                                 {{ slotProps.option.name }}
                             </div>
-                        </div>
-                    </template>
-                    <template #footer>
-                        <div class="py-2 px-3">
-                            <b>{{
-                                selectedCountries ? selectedCountries.length : 0
-                            }}</b>
-                            item{{
-                                (selectedCountries
-                                    ? selectedCountries.length
-                                    : 0) > 1
-                                    ? 's'
-                                    : ''
-                            }}
-                            selected.
                         </div>
                     </template>
                 </MultiSelect>
@@ -315,6 +300,7 @@ const colorOptions = ref([]);
 const fetchColors = async () => {
     const { data } = await $authHost.get('/api/color');
     colorOptions.value = data;
+    console.log(colorOptions.value)
 };
 
 onBeforeMount(() => {

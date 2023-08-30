@@ -24,17 +24,7 @@ const fetchData = async () => {
     deviceStore.types = typeRes.data;
 
     const deviseRes = await $host.get('api/device');
-    let devices = [];
-    for (const device of deviseRes.data) {
-        device.typeName = deviceStore.types.find(
-            (type) => type._id === device.type,
-        )?.name;
-        device.brandName = deviceStore.brands.find(
-            (brand) => brand._id === device.brand,
-        )?.name;
-        devices.push(device);
-    }
-    deviceStore.devices = devices;
+    deviceStore.devices = deviseRes.data;
 };
 const formObject = ref({});
 

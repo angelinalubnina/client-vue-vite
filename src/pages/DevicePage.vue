@@ -44,22 +44,22 @@
             <div>
                 <div>
                     <div
-                        v-for="(color, index) in getColors()"
+                        v-for="(colorCode, index) in colorCodes"
                         :key="index"
                         class="color-option"
                     >
                         <input
                             type="radio"
-                            :id="color.code"
-                            :value="color.name"
-                            v-model="selectedColor"
+                            :id="colorCode"
+                            :value="colorCode"
+                            v-model="selectedCode"
                         />
                         <label
-                            :for="color"
-                            :style="{ backgroundColor: color.code }"
+                            :for="colorCode"
+                            :style="{ backgroundColor: colorCode }"
                         ></label>
                     </div>
-                    <p>Выбранный цвет: {{ selectedColor.name }}</p>
+                    <p>Выбранный цвет: {{ selectedCode }}</p>
                 </div>
             </div>
         </div>
@@ -70,7 +70,7 @@
 <script setup>
 import { useRoute } from 'vue-router';
 import { ref, onMounted, computed, onBeforeMount } from 'vue';
-import { $host } from '../http/index';
+import { $host, $authHost } from '../http/index';
 import { SERVER_URL, defaultDeviceImg, DEVICE_ROUTE } from '../utils/consts';
 
 const images = ref([]);
@@ -89,41 +89,42 @@ const responsiveOptions = ref([
     },
 ]);
 
-const route = useRoute();
-const name = route.params.name;
 const device = ref(null);
 
-const nameDevice = ref('');
+const rating = computed(() => {
+    return device.value === null ? 0 : device.value.rating;
+});
+
 const getPrice = () => {
     return device.value.price;
 };
-// const getRating = () => {
-//     return device.value.rating;
-// };
-
-const rating = computed(() => {
-    debugger;
-    return device.value === null ? 0 : device.value.rating;
-});
 
 const getDescription = () => {
     return device.value.description;
 };
 
-const getColors = () => {
-    return device.value.colors;
-};
+let availableColors = ref();
+const selectedCode = ref('')
+let colors = ref([])
+let colorCodes = ref([])
+const selectedColor = computed(() => {
+    for (const color of colors.value) {
+        if (color.code === selectedCode.value){
+            return color
+        }
+    }
+    return {}
+})
 
-const selectedColor = ref('');
+const route = useRoute();
+const name = route.params.name;
+const nameDevice = ref('');
 
 async function findPictures() {
-    const response = await $host.get('api/device/' + name);
-    device.value = response.data;
-    debugger;
     if (device.value.images.length > 0) {
-        for (const name of device.value.images) {
+        for (const imageName of device.value.images) {
             images.value.push({
-                name: SERVER_URL + 'devices/' + device.value.name + '/' + name,
+                name: SERVER_URL + 'devices/' + device.value.name + '/' + imageName,
             });
         }
     } else {
@@ -144,10 +145,14 @@ const isDeviceLoaded = computed(() => {
     }
 });
 
-
-
 onBeforeMount(async () => {
-    findPictures();
+    const response = await $host.get('api/device/' + name)
+    device.value = response.data;
+
+    colors.value = device.value.availableColors
+    colorCodes.value = device.value.availableColors.map(color => color.code)
+    
+    await findPictures();
 });
 </script>
 
